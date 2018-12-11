@@ -1,0 +1,97 @@
+### FANER ####
+default_view:
+  name: Hjem
+  view: yes
+  entities:
+    group.home
+    
+network_view:
+  name: Nettverk
+  view: yes
+  entities:
+    group.network
+
+technical_view:
+  name: Teknisk
+  view: yes
+  entities:
+    group.technical
+
+alarm_view:
+  name: Alarm
+  view: yes
+  entities:
+    group.alarm
+
+admin_view:
+  name: Administrativt
+  view: yes
+  entities:
+    - group.admin
+    
+### GRUPPER ###
+home:
+  name: Hjem
+  entities:
+    - sensor.p12_varsel_symbol
+    - sensor.p12_varsel_temperature
+    - sun.sun
+    - binary_sensor.vision_zg8101_garage_door_detector_sensor
+    - alarm_control_panel.pers_vei_alarm
+    - binary_sensor.unknown_node_6_sensor
+    - sensor.fastcom_download
+    - sensor.electricity_price_pers_vei_12
+    - sensor.netatmo_outdoor_temperature
+    - sensor.netatmo_station_pressure 
+    - switch.aeotec_zw075_smart_switch_gen5_switch
+    - switch.aeotec_zw075_smart_switch_gen5_switch_2
+
+network:
+  name: Nettverk
+  entities:
+ #   - media_player.stue_1
+ #   - media_player.stue_2
+    - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+    - sensor.fibaro_system_fgwpef_wall_plug_gen5_power
+ #   - sensor.mcnas_status
+ #   - sensor.mcnas_volume_used_volume_1
+ #   - sensor.mcnas_cpu_usage
+ #   - sensor.mcnas_memory_usage
+ #   - sensor.mcnas_network_up_eth0
+ #   - sensor.mcnas_network_up_eth1
+
+technical:
+  name: Teknisk
+  entities:
+    - sensor.fastcom_download
+    - sensor.electricity_price_pers_vei_12
+    - sensor.soverom_garasje_temperature
+    - sensor.soverom_garasje_humidity
+    - sensor.soverom_barn_temperature
+    - sensor.soverom_barn_humidity
+    - sensor.speilrom_temperature
+    - sensor.speilrom_humidity
+    - sensor.stue_temperature
+    - sensor.stue_humidity
+    - switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2
+    - sensor.fibaro_system_fgwpef_wall_plug_gen5_power_2
+    - switch.fibaro_system_fgwpef_wall_plug_gen5_switch_3
+    - sensor.fibaro_system_fgwpef_wall_plug_gen5_power_4
+
+alarm:
+  name: Alarm
+  entities:
+    - binary_sensor.entredr
+    - binary_sensor.inngangsdr
+    - binary_sensor.matbod
+    - binary_sensor.skyvedr_speilrom
+    - binary_sensor.skyvedr_stue
+    - binary_sensor.soveromsdr
+
+admin:
+  name: Administrativt
+  entities:
+    - camera.uvc_g3_dome
+    - vacuum.sucker
+    - switch.sucker_schedule
+    - camera.sucker_cleaning_map

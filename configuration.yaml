@@ -1,0 +1,154 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: !secret ha_name
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret ha_lat
+  longitude: !secret ha_lon
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret ha_elv
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Oslo
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Enable configurator web view
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://ha.nummer13.com:3218
+
+# Enable database purge at a schedule
+recorder:
+  purge_keep_days: 10
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
+    entities:
+      - sun.sun
+      - sensor.last_boot
+      - sensor.date
+
+# Customization of P12  
+
+# Z-wave
+zwave:
+  usb_path: /dev/ttyACM0
+
+# MQTT
+#mqtt:
+#  broker: 192.168.1.180
+
+# Verisure
+verisure:
+  username: !secret verisure_user
+  password: !secret verisure_password
+
+# iOS
+ios:
+
+# Tibber
+tibber:
+  access_token: !secret tibber_token
+
+# Unifi camera
+# Note: API key found at Unifi video admin page under Users/
+# in your admin profile where API ACCESS lies.
+camera:
+  - platform: uvc
+    nvr: 192.168.1.9
+    key: !secret uvc_key
+    port: 7080
+    password: !secret uvc_password
+    
+  - platform: generic
+    name: Vær
+    still_image_url: https://www.yr.no/sted/Norge/Hordaland/Bergen/Bergen/meteogram.svg
+    content_type: 'image/svg+xml'
+
+# Netatmo
+# Note: API- and secret-key ID found at developer API page for 
+# Netatmo (login required)
+netatmo:
+  api_key: !secret netatmo_apikey
+  secret_key: !secret netatmo_secretkey
+  username: !secret netatmo_user
+  password: !secret netatmo_password
+  discovery: True
+
+# Neato
+neato:
+  username: !secret neato_user
+  password: !secret neato_password
+
+# Track the sun
+sun:
+
+# Telegram
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - !secret telegram_chat_ids
+notify:
+  - platform: telegram
+    name: telegram
+    chat_id: !secret telegram_chat_ids
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+group: !include groups.yaml
+automation: !include_dir_merge_list automation
+#automation: !include automations.yaml
+script: !include scripts.yaml
+sensor: !include_dir_merge_list sensor
+#sensor: !include sensors.yaml
+

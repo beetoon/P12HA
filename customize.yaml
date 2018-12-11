@@ -1,0 +1,85 @@
+
+sensor.fibaro_system_fgfs101_flood_sensor_temperature:
+  friendly_name: Vannsensor kjøkken (temp)
+
+binary_sensor.vision_zg8101_garage_door_detector_sensor:
+  device_class: garage_door
+  friendly_name: Garasjeport
+  icon: mdi:garage
+  
+switch.aeotec_zw075_smart_switch_gen5_switch:
+  friendly_name: Lys garasje
+  icon: mdi:power_socket_eu
+  
+switch.aeotec_zw075_smart_switch_gen5_switch_2:
+  friendly_name: Lys garasje
+  icon: mdi:power_socket_eu
+  
+switch.fibaro_system_fgwpef_wall_plug_gen5_switch:
+  friendly_name: mcServer strøm (forsiktig!)
+  device_class: switch
+  icon: mdi:power-socket-eu
+
+sensor.fibaro_system_fgwpef_wall_plug_gen5_power:
+  friendly_name: mcServer (effekt)
+  icon: mdi:gauge-low
+
+switch.fibaro_system_fgwpef_wall_plug_gen5_switch_3:
+  friendly_name: tørketrommel
+  device_class: switch
+  icon: mdi:power-socket-eu
+  
+sensor.fibaro_system_fgwpef_wall_plug_gen5_power_4:
+  friendly_name: tørketrommel (effekt)
+  icon: mdi:gauge-low
+
+switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2:
+  friendly_name: motorvarmer (i terrassebod)
+  device_class: switch
+  icon: mdi:power-socket-eu
+
+sensor.fibaro_system_fgwpef_wall_plug_gen5_power_2:
+  friendly_name: motorvarmer (effekt)
+  icon: mdi:gauge-low
+
+switch.sucker_schedule:
+  homebridge_hidden: true
+
+sensor.gang_underetasje_humidity:
+  friendly_name: Gang (%)
+  homebridge_hidden: true
+  icon: mdi:water-percent
+sensor.gang_underetasje_temperature:
+  friendly_name: Gang (C)
+  icon: mdi:water-percent
+sensor.soverom_barn_humidity:
+  homebridge_hidden: true
+  icon: mdi:water-percent
+sensor.soverom_garasje_humidity:
+  homebridge_hidden: true
+  icon: mdi:water-percent
+sensor.soveromsgang_humidity:
+  homebridge_hidden: true
+  icon: mdi:water-percent
+sensor.speilrom_humidity:
+  homebridge_hidden: true
+  icon: mdi:water-percent
+sensor.stue_humidity:
+  homebridge_hidden: true
+  icon: mdi:water-percent
+
+#Verisure
+binary_sensor.matbod:
+  device_class: door
+binary_sensor.inngangsdr:
+  device_class: door
+binary_sensor.entredr:
+  device_class: door
+binary_sensor.skyvedr_speilrom:
+  device_class: door
+binary_sensor.skyvedr_stue:
+  device_class: door
+binary_sensor.soveromsdr:
+  device_class: door
+zwave.__2:
+  homebridge_hidden: true

@@ -1,0 +1,41 @@
+# Here you put your various sensors, such as weather, MQTT, speedtests...
+  - platform: yr
+    name: P12 varsel
+    forecast: 24
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - pressure
+      - windDirection
+      - humidity
+      - fog
+      - cloudiness
+      - lowClouds
+      - mediumClouds
+      - highClouds
+      - dewpointTemperature
+#  - platform: mqtt
+#    state_topic: 'sauna/temp'
+#    name: 'Sauna MQTT °C'
+#    unit_of_measurement: '°C'
+#    value_template: '{{ value_json.temperature }}'
+  - platform: fastdotcom
+    name: "Nettverkshastighet"
+    minute:
+      - 0
+      - 30
+#  - platform: filesize
+#    file_paths:
+#      - /home-assistant_v2.db
+  - platform: qnap
+    host: 192.168.1.15
+    username: admin
+    password: Pjong65La
+    monitored_conditions:
+      - status
+      - cpu_usage
+      - memory_percent_used
+      - network_tx
+      - volume_percentage_used

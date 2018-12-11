@@ -1,0 +1,77 @@
+- id: garage_lights_on_when_gate_opens
+  alias: Skru på garasjelys når port åpnes
+  trigger:
+  - entity_id: binary_sensor.vision_zg8101_garage_door_detector_sensor
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - entity_id: switch.aeotec_zw075_smart_switch_gen5_switch
+    service: switch.turn_on
+  - entity_id: switch.aeotec_zw075_smart_switch_gen5_switch_2
+    service: switch.turn_on
+
+- id: garage_lights_off_when_gate_closes
+  alias: Skru av garasjelys når port lukkes
+  trigger:
+  - entity_id: binary_sensor.vision_zg8101_garage_door_detector_sensor
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - entity_id: switch.aeotec_zw075_smart_switch_gen5_switch
+    service: switch.turn_off
+  - entity_id: switch.aeotec_zw075_smart_switch_gen5_switch_2
+    service: switch.turn_off
+
+- id: garage_lights_on_more_than_1_hour
+  alias: Garasjelys er fortsatt på
+  trigger:
+  - platform: state
+    entity_id: switch.aeotec_zw075_smart_switch_gen5_switch
+    to: 'on'
+    for:
+      seconds: 5
+  action:
+    service: notify.telegram
+    data:
+      title: 'Sjekk:'
+      message: Garasjelys er fortsatt på!
+- id: '1541018801188'
+  alias: Netatmo batteri lavt
+  trigger:
+  - entity_id: sensor.netatmo_outdoor_battery
+    platform: state
+    to: low
+  condition: []
+  action:
+  - data:
+      message: Batteri Netatmo ute er lavt!
+      title: 'Sjekk:'
+    service: notify.telegram
+- id: '1544368897554'
+  alias: Motorvarmer OFF 0800
+  trigger:
+  - at: 08:00
+    platform: time
+  condition: []
+  action:
+  - entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2
+    service: switch.turn_off
+  - data:
+      message: Motorvarmer av
+    service: persistent_notification.create
+- id: '1544376858055'
+  alias: Motorvarmer ON 0530
+  trigger:
+  - at: 05:30
+    platform: time
+  condition: []
+  action:
+  - entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2
+    service: switch.turn_on
+  - data:
+      message: Motorvarmer på
+    service: persistent_notification.create
