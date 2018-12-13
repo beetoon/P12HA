@@ -1,0 +1,15 @@
+# Influxdb
+influxdb:
+  host: 127.0.0.1
+  port: 8086
+  username: admin
+  database: home_assistant
+  default_measurement: state
+  include:
+    entities:
+    # Add entities here
+      - light.floalt_panel_ws_30x30_2
+  exclude:
+    domains:
+      # Add entities here
+      - group

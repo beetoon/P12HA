@@ -46,3 +46,4 @@ custom_components/
 .storage/
 zwcfg*.xml
 zwscene.xml
+._*.xml
