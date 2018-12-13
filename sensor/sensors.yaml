@@ -32,10 +32,11 @@
   - platform: qnap
     host: 192.168.1.15
     username: admin
-    password: Pjong65La
+    password: !secret qnap_pw
     monitored_conditions:
       - status
       - cpu_usage
       - memory_percent_used
       - network_tx
       - volume_percentage_used
+  - platform: pi_hole
