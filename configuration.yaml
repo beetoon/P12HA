@@ -25,7 +25,7 @@ config:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
+  api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
@@ -40,6 +40,8 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  ignore:
+    - apple_tv
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -60,6 +62,22 @@ panel_iframe:
     icon: mdi:wrench
     url: http://ha.nummer13.com:3218
 
+# Enable logging to influx database home_assistant (created manually)
+influxdb:
+  host: 127.0.0.1
+  port: 8086
+  database: home_assistant
+  default_measurement: state
+  include:
+    entities:
+      - sensor.electricity_price_pers_vei_12
+      - sensor.fastcom_download
+      - sensor.netatmo_outdoor_temperature
+      - sensor.stue_temperature
+  exclude:
+    domains:
+      - group
+
 # Enable database purge at a schedule
 recorder:
   purge_keep_days: 10
@@ -78,10 +96,16 @@ recorder:
 # Z-wave
 zwave:
   usb_path: /dev/ttyACM0
+  
+# Enabling logging of components of interest
+logger:
+  default: warning
+  logs:
+    homeassistant.components.mqtt: debug
 
 # MQTT
-#mqtt:
-#  broker: 192.168.1.180
+mqtt:
+  password: !secret mqtt_password
 
 # Verisure
 verisure:
