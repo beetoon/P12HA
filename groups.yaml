@@ -47,7 +47,7 @@ home:
     - switch.aeotec_zw075_smart_switch_gen5_switch
     - switch.aeotec_zw075_smart_switch_gen5_switch_2
     - light.floalt_panel_ws_30x30_2
-
+    - light.floalt_panel_ws_30x30
 
 network:
   name: Nettverk
@@ -66,6 +66,9 @@ network:
 technical:
   name: Teknisk
   entities:
+    - sensor.leaf_battery
+    - sensor.leaf_battery_charg_status
+    - sensor.leaf_status
     - sensor.fastcom_download
     - sensor.electricity_price_pers_vei_12
     - sensor.soverom_garasje_temperature

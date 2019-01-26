@@ -98,19 +98,24 @@ zwave:
   usb_path: /dev/ttyACM0
   
 # Enabling logging of components of interest
-logger:
-  default: warning
-  logs:
-    homeassistant.components.mqtt: debug
+#logger:
+# default: warning
+#  logs:
+#    homeassistant.components.mqtt: debug
 
 # MQTT
 mqtt:
-  password: !secret mqtt_password
-
+#  password: !secret mqtt_password
+  broker: 192.168.1.7
+  
 # Verisure
 verisure:
   username: !secret verisure_user
   password: !secret verisure_password
+
+# IFTTT
+ifttt:
+  key: !secret ifttt_apikey
 
 # iOS
 ios:

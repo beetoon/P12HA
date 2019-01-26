@@ -29,20 +29,28 @@
 #  - platform: filesize
 #    file_paths:
 #      - /home-assistant_v2.db
-  - platform: qnap
-    host: 192.168.1.15
-    username: admin
-    password: !secret qnap_pw
-    monitored_conditions:
-      - status
-      - cpu_usage
-      - memory_percent_used
-      - network_tx
-      - volume_percentage_used
+#  - platform: qnap
+#    host: 192.168.1.15
+#    username: admin
+#    password: !secret qnap_pw
+#    monitored_conditions:
+#      - status
+#      - cpu_usage
+#      - memory_percent_used
+#      - network_tx
+#      - volume_percentage_used
   - platform: pi_hole
     host: 192.168.1.4
   - platform: mqtt
     name: "Humor"
     state_topic: "home-assistant/humor"  
-    name: "Leaf"
-    state_topic: "leaf/control"
+  - platform: mqtt
+    state_topic: "leaf/status/battery_percent"
+    name: "Leaf Battery"
+    value_template: "{{ value_json | round(2) }}"
+  - platform: mqtt
+    state_topic: "leaf/status/last_updated"
+    name: "Leaf Status"
+  - platform: mqtt
+    state_topic: "leaf/status/charging_status"
+    name: "Leaf Battery Charge Status"

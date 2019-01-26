@@ -45,8 +45,12 @@ sensor.fibaro_system_fgwpef_wall_plug_gen5_power_2:
 switch.sucker_schedule:
   homebridge_hidden: true
 
+# IKEA tradfri
 light.floalt_panel_ws_30x30_2:
   friendly_name: Taklampe soverom Magnus
+  icon: mdi:ceiling-light
+light.floalt_panel_ws_30x30:
+  friendly_name: Taklampe soverom Erlend
   icon: mdi:ceiling-light
 
 sensor.gang_underetasje_humidity:
@@ -71,8 +75,16 @@ sensor.speilrom_humidity:
 sensor.stue_humidity:
   homebridge_hidden: true
   icon: mdi:water-percent
+  
+# Nissan Leaf
+sensor.leaf_battery:
+  icon: mdi:battery
+sensor.leaf_battery_charg_status:
+  icon: mdi:battery
+sensor.leaf_status:
+  icon: mdi:car-connected
 
-#Verisure
+# Verisure
 binary_sensor.matbod:
   device_class: door
 binary_sensor.inngangsdr:

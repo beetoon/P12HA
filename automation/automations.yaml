@@ -52,9 +52,9 @@
       title: 'Sjekk:'
     service: notify.telegram
 - id: '1544368897554'
-  alias: Motorvarmer OFF 0800
+  alias: Motorvarmer OFF 0900
   trigger:
-  - at: 08:00
+  - at: 09:00
     platform: time
   condition: []
   action:
@@ -75,3 +75,36 @@
   - data:
       message: Motorvarmer på
     service: persistent_notification.create
+
+# LEAF: Update Carwings data
+- id: update_nissan_leaf_status
+  alias: 'Update status Nissan Leaf'
+  trigger:
+  - platform: time
+    at: "21:00:00"
+  action:
+  - service: mqtt.publish
+    data:
+        topic: "leaf/control/update"
+        payload: "1" 
+ 
+# LEAF: Charge-reminder
+- id: verify_nissan_leaf_charge_status
+  alias: 'Check charging status Nissan Leaf'
+  trigger:
+  - platform: time
+    at: "21:30:00"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sensor.leaf_battery_charg_status
+        state: 'NOT_CHARGING'
+      - condition: numeric_state
+        entity_id: 'sensor.leaf_battery'
+        below: '50'
+  action:
+  - service: notify.telegram
+    data:
+        message: "The battery is below 50% Charge?"
+        title: "Nissan Leaf"
