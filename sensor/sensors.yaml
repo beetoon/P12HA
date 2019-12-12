@@ -21,36 +21,50 @@
 #    name: 'Sauna MQTT °C'
 #    unit_of_measurement: '°C'
 #    value_template: '{{ value_json.temperature }}'
-  - platform: fastdotcom
-    name: "Nettverkshastighet"
-    minute:
-      - 0
-      - 30
-#  - platform: filesize
-#    file_paths:
-#      - /home-assistant_v2.db
-#  - platform: qnap
-#    host: 192.168.1.15
-#    username: admin
-#    password: !secret qnap_pw
-#    monitored_conditions:
-#      - status
-#      - cpu_usage
-#      - memory_percent_used
-#      - network_tx
-#      - volume_percentage_used
+
+  - platform: entur_public_transport
+    name: Transport
+    expand_platforms: true
+    show_on_map: true
+    stop_ids:
+      - 'NSR:StopPlace:58379' # Vollen brygge
+      - 'NSR:StopPlace:58382' # Aker Brygge
+      - 'NSR:StopPlace:3393'  # Bjerkås
+
+  - platform: template
+    sensors:
+      brinedeltatemp:
+        friendly_name: "Brine delta in/out (degrees)"
+        unit_of_measurement: 'degrees'
+        value_template: "{{ states('sensor.nibe_26191_40015')|float - states('sensor.nibe_26191_40016')|float }}"
+
+  - platform: filesize
+    file_paths:
+      - /config/home-assistant_v2.db
+  - platform: qnap
+    host: 192.168.1.15
+    username: admin
+    password: !secret qnap_pw
+    monitored_conditions:
+      - status
+      - cpu_usage
+      - memory_percent_used
+      - network_tx
+      - volume_percentage_used
+
   - platform: pi_hole
     host: 192.168.1.4
+    monitored_conditions:
+      - ads_blocked_today
+      - ads_percentage_today
+      - dns_queries_today
+      - domains_being_blocked
+      - queries_cached
+      - queries_forwarded
+      - unique_clients
+      - unique_domains
+      - clients_ever_seen
+
   - platform: mqtt
     name: "Humor"
-    state_topic: "home-assistant/humor"  
-  - platform: mqtt
-    state_topic: "leaf/status/battery_percent"
-    name: "Leaf Battery"
-    value_template: "{{ value_json | round(2) }}"
-  - platform: mqtt
-    state_topic: "leaf/status/last_updated"
-    name: "Leaf Status"
-  - platform: mqtt
-    state_topic: "leaf/status/charging_status"
-    name: "Leaf Battery Charge Status"
+    state_topic: "home-assistant/humor"

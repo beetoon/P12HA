@@ -11,7 +11,6 @@
     service: switch.turn_on
   - entity_id: switch.aeotec_zw075_smart_switch_gen5_switch_2
     service: switch.turn_on
-
 - id: garage_lights_off_when_gate_closes
   alias: Skru av garasjelys når port lukkes
   trigger:
@@ -25,7 +24,6 @@
     service: switch.turn_off
   - entity_id: switch.aeotec_zw075_smart_switch_gen5_switch_2
     service: switch.turn_off
-
 - id: garage_lights_on_more_than_1_hour
   alias: Garasjelys er fortsatt på
   trigger:
@@ -75,36 +73,35 @@
   - data:
       message: Motorvarmer på
     service: persistent_notification.create
-
-# LEAF: Update Carwings data
-- id: update_nissan_leaf_status
-  alias: 'Update status Nissan Leaf'
-  trigger:
-  - platform: time
-    at: "21:00:00"
-  action:
-  - service: mqtt.publish
-    data:
-        topic: "leaf/control/update"
-        payload: "1" 
- 
-# LEAF: Charge-reminder
 - id: verify_nissan_leaf_charge_status
-  alias: 'Check charging status Nissan Leaf'
+  alias: Kontroller Nissan Leaf status om kveld
   trigger:
   - platform: time
-    at: "21:30:00"
+    at: '21:30:00'
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: sensor.leaf_battery_charg_status
-        state: 'NOT_CHARGING'
-      - condition: numeric_state
-        entity_id: 'sensor.leaf_battery'
-        below: '50'
+    - condition: state
+      entity_id: sensor.leaf1torg_charge
+      state: NOT_CHARGING
+    - condition: numeric_state
+      entity_id: sensor.leaf_battery
+      below: '90'
   action:
   - service: notify.telegram
     data:
-        message: "The battery is below 50% Charge?"
-        title: "Nissan Leaf"
+      message: The battery is below 90% Charge?
+      title: Nissan Leaf
+- id: '1573590225770'
+  alias: Octoprint almost done
+  description: ''
+  trigger:
+  - above: '99'
+    entity_id: sensor.octoprint_job_percentage
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: 3D utskrift snart ferdig.
+      title: '3D printer:'
+    service: notify.telegram

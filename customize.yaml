@@ -1,58 +1,44 @@
-
 sensor.fibaro_system_fgfs101_flood_sensor_temperature:
   friendly_name: Vannsensor kjøkken (temp)
-
 binary_sensor.vision_zg8101_garage_door_detector_sensor:
   device_class: garage_door
   friendly_name: Garasjeport
   icon: mdi:garage
-  
 switch.aeotec_zw075_smart_switch_gen5_switch:
   friendly_name: Lys garasje
   icon: mdi:power_socket_eu
-  
 switch.aeotec_zw075_smart_switch_gen5_switch_2:
   friendly_name: Lys garasje
   icon: mdi:power_socket_eu
-  
 switch.fibaro_system_fgwpef_wall_plug_gen5_switch:
   friendly_name: mcServer strøm (forsiktig!)
   device_class: switch
   icon: mdi:power-socket-eu
-
 sensor.fibaro_system_fgwpef_wall_plug_gen5_power:
   friendly_name: mcServer (effekt)
   icon: mdi:gauge-low
-
 switch.fibaro_system_fgwpef_wall_plug_gen5_switch_3:
   friendly_name: tørketrommel
   device_class: switch
   icon: mdi:power-socket-eu
-  
 sensor.fibaro_system_fgwpef_wall_plug_gen5_power_4:
   friendly_name: tørketrommel (effekt)
   icon: mdi:gauge-low
-
 switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2:
   friendly_name: motorvarmer (i terrassebod)
   device_class: switch
   icon: mdi:power-socket-eu
-
 sensor.fibaro_system_fgwpef_wall_plug_gen5_power_2:
   friendly_name: motorvarmer (effekt)
   icon: mdi:gauge-low
-
 switch.sucker_schedule:
   homebridge_hidden: true
-
-# IKEA tradfri
 light.floalt_panel_ws_30x30_2:
   friendly_name: Taklampe soverom Magnus
   icon: mdi:ceiling-light
 light.floalt_panel_ws_30x30:
   friendly_name: Taklampe soverom Erlend
   icon: mdi:ceiling-light
-
 sensor.gang_underetasje_humidity:
   friendly_name: Gang (%)
   homebridge_hidden: true
@@ -75,27 +61,57 @@ sensor.speilrom_humidity:
 sensor.stue_humidity:
   homebridge_hidden: true
   icon: mdi:water-percent
-  
-# Nissan Leaf
-sensor.leaf_battery:
-  icon: mdi:battery
-sensor.leaf_battery_charg_status:
-  icon: mdi:battery
-sensor.leaf_status:
-  icon: mdi:car-connected
-
-# Verisure
 binary_sensor.matbod:
   device_class: door
-binary_sensor.inngangsdr:
+binary_sensor.inngangsdor:
   device_class: door
-binary_sensor.entredr:
+binary_sensor.entredor:
   device_class: door
-binary_sensor.skyvedr_speilrom:
+binary_sensor.skyvedor_speilrom:
   device_class: door
-binary_sensor.skyvedr_stue:
+binary_sensor.skyvedor_stue:
   device_class: door
-binary_sensor.soveromsdr:
+binary_sensor.soveromsdor:
   device_class: door
-zwave.__2:
+#zwave.__2:
   homebridge_hidden: true
+
+sensor.electricity_price_pers_vei_12:
+  friendly_name: Strømpris
+sensor.real_time_consumption_pers_vei_12:
+  friendly_name: Forbruk strøm
+
+sensor.netatmo_outdoor_temperature:
+  friendly_name: Utendørstemperatur
+sensor.netatmo_outdoor_pressure:
+  friendly_name: Barometer
+sensor.netatmo_outdoor_humidity:
+  friendly_name: Utendørs fuktighet
+sensor.netatmo_station_humidity:
+  friendly_name: Innendørs fuktighet
+
+device_tracker.nissan_leaf_leaf1torg:
+  friendly_name: Leaf posisjon
+sensor.leaf1torg_charge:
+  friendly_name: Leaf ladestatus
+sensor.leaf1torg_range_ac:
+  friendly_name: Leaf rekkevidde (med AC)
+binary_sensor.leaf1torg_charging_status:
+  friendly_name: Leaf lader
+binary_sensor.leaf1torg_plug_status:
+  friendly_name: Leaf ladekabel plugget inn
+device_tracker.nissan_leaf1torg:
+  friendly_name: Leaf posisjon
+switch.leaf1torg_climate_control:
+  friendly_name: Leaf klimakontroll
+
+sensor.speedtest_upload:
+  friendly_name: Internett opp
+sensor.speedtest_download:
+  friendly_name: Internett ned
+sensor.speedtest_ping:
+  friendly_name: Internett respons
+
+sensor.pi_hole_ads_blocked_today:
+  friendly_name: Internett dritt blokkert (i dag)
+

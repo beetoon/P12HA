@@ -1,0 +1,7 @@
+'1573590014366':
+  alias: Octoprint almost done
+  sequence:
+  - above: '99'
+    condition: numeric_state
+    entity_id: sensor.octoprint_job_percentage
+  - service: notify.telegram

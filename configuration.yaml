@@ -13,6 +13,8 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 #  packages: !include_dir_named packages
+  whitelist_external_dirs:
+    - /opt
 
 # Show links to resources in log and frontend
 # introduction:
@@ -20,12 +22,17 @@ homeassistant:
 # Enables the frontend
 frontend:
 
+# Enable mobile app
+mobile_app:
+
 # Enables configuration UI
 config:
 
+# Enable system health
+system_health:
+
 http:
   # Secrets are defined in the file secrets.yaml
-  api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
@@ -58,9 +65,9 @@ map:
 # Enable configurator web view
 panel_iframe:
   configurator:
-    title: Configurator
+    title: Konfigurasjon
     icon: mdi:wrench
-    url: http://ha.nummer13.com:3218
+    url: http://192.168.1.7:3218
 
 # Enable logging to influx database home_assistant (created manually)
 influxdb:
@@ -71,9 +78,26 @@ influxdb:
   include:
     entities:
       - sensor.electricity_price_pers_vei_12
-      - sensor.fastcom_download
+      - sensor.real_time_consumption_pers_vei_12
       - sensor.netatmo_outdoor_temperature
+      - sensor.p12_varsel_temperature
       - sensor.stue_temperature
+      - sensor.speedtest_upload
+      - sensor.speedtest_download
+      - sensor.speedtest_ping
+      - sensor.pi_hole_ads_blocked_today
+      - sensor.pi_hole_ads_percentage_blocked_today
+      - sensor.pi_hole_dns_queries_cached
+      - sensor.pi_hole_dns_queries_forwarded
+      - sensor.pi_hole_dns_queries_today
+      - sensor.pi_hole_dns_unique_clients
+      - sensor.pi_hole_domains_blocked
+      - sensor.pi_hole_seen_clients
+      - sensor.speilrom_temperature
+      - sensor.kjokken_temperature
+      - sensor.soverom_barn_temperature
+      - sensor.soveromsgang_temperature
+      - sensor.gang_underetasje_temperature
   exclude:
     domains:
       - group
@@ -106,12 +130,20 @@ zwave:
 # MQTT
 mqtt:
 #  password: !secret mqtt_password
-  broker: 192.168.1.7
+#  broker: 192.168.1.7
+
+# Speedtest.net
+speedtestdotnet:
   
 # Verisure
 verisure:
   username: !secret verisure_user
   password: !secret verisure_password
+
+#Octoprint
+octoprint:
+  host: 192.168.1.154
+  api_key: 9818A2BCB3A34EE2B494A577244B88A1
 
 # IFTTT
 ifttt:
@@ -147,7 +179,35 @@ netatmo:
   secret_key: !secret netatmo_secretkey
   username: !secret netatmo_user
   password: !secret netatmo_password
-  discovery: True
+
+# NIBE heatpump
+nibe:
+  systems:
+    - system: 26191
+      units:
+        - unit: 0
+          categories: True
+          statuses: True
+      climates: True
+      water_heaters: True
+      fans: True
+
+# Nissan Leaf
+nissan_leaf:
+  username: !secret nissanleaf_user
+  password: !secret nissanleaf_password
+  region: !secret nissanleaf_region
+  update_interval:
+    hours: 1
+  update_interval_charging:
+    minutes: 15
+  update_interval_climate:
+    minutes: 5
+
+# Tesla
+tesla:
+    username: !secret tesla_user
+    password: !secret tesla_password
 
 # Neato
 neato:
@@ -170,14 +230,18 @@ notify:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
+
+# Pi-hole
+pi_hole:
 
 # Cloud
 cloud:
 
 group: !include groups.yaml
-automation: !include_dir_merge_list automation
-#automation: !include automations.yaml
+#automation: !include_dir_merge_list automation
+automation: !include automations.yaml
 script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor
 #sensor: !include sensors.yaml
