@@ -122,10 +122,12 @@ zwave:
   usb_path: /dev/ttyACM0
   
 # Enabling logging of components of interest
-#logger:
-# default: warning
-#  logs:
-#    homeassistant.components.mqtt: debug
+logger:
+  default: critical
+  logs:
+    homeassistant.components.nissan_leaf: debug
+    homeassistant.components.sensor.nissan_leaf: debug
+    homeassistant.components.switch.nissan_leaf: debug
 
 # MQTT
 mqtt:
@@ -134,6 +136,13 @@ mqtt:
 
 # Speedtest.net
 speedtestdotnet:
+
+#Xiaomi Roborock vacuum robot
+#vacuum:
+#  - platform: xiaomi_miio
+#    host: 
+#    token: 
+
   
 # Verisure
 verisure:

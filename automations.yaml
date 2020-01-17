@@ -76,24 +76,24 @@
 - id: verify_nissan_leaf_charge_status
   alias: Kontroller Nissan Leaf status om kveld
   trigger:
-  - platform: time
-    at: '21:30:00'
+  - at: '21:30:00'
+    platform: time
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: state
       entity_id: sensor.leaf1torg_charge
       state: NOT_CHARGING
-    - condition: numeric_state
+    - below: '40'
+      condition: numeric_state
       entity_id: sensor.leaf_battery
-      below: '90'
   action:
-  - service: notify.telegram
-    data:
+  - data:
       message: The battery is below 90% Charge?
       title: Nissan Leaf
+    service: notify.telegram
 - id: '1573590225770'
-  alias: Octoprint almost done
+  alias: Octoprint snart ferdig
   description: ''
   trigger:
   - above: '99'
