@@ -84,7 +84,7 @@
     - condition: state
       entity_id: sensor.leaf1torg_charge
       state: NOT_CHARGING
-    - below: '40'
+    - below: '90'
       condition: numeric_state
       entity_id: sensor.leaf_battery
   action:
